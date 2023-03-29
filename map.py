@@ -17,7 +17,7 @@ import warnings
 import matplotlib.pyplot as plt
 import nitools as nt
 
-def reslice_fs_to_wb(subjName,subjDir,outDir,\
+def reslice_fs_to_wb(subjName,subjDir,outDir,atlasDir,\
                  smoothing=1,surfFiles=["white","pial","inflated"],\
                  curvFiles=["curv","sulc","area"],hemisphere=[0,1],\
                  alignSurf=[1,1,1],resolution="32k"):
@@ -59,8 +59,8 @@ def reslice_fs_to_wb(subjName,subjDir,outDir,\
         Resampled surfaces (gifti files)
     """
     
-    BASE_DIR = pathlib.Path('surfAnalysisPy').resolve()
-    atlasDir = BASE_DIR.joinpath('standard_mesh')
+    #BASE_DIR = pathlib.Path('surfAnalysisPy').resolve()
+    #atlasDir = BASE_DIR.joinpath('standard_mesh')
     
     
     hemisphere = np.array(hemisphere)
@@ -88,7 +88,7 @@ def reslice_fs_to_wb(subjName,subjDir,outDir,\
     
     # Create new output directory for subject
     subjOutDir = os.path.join(outDir,subjName)
-    if not subjOutDir:
+    if not os.path.isdir(subjOutDir):
         os.mkdir(subjOutDir)
      
     numSurfFiles = len(surfFiles)
